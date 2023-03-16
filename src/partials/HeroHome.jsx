@@ -126,7 +126,7 @@ function HeroHome() {
             </div>
             {/* Modal */}
 
-            {/* <Modal
+           <Modal
               id="modal"
               ariaLabel="modal-headline"
               show={videoModalOpen}
@@ -135,12 +135,12 @@ function HeroHome() {
               <div className="relative pb-9/16">
                  <iframe
                   className="absolute w-full h-full"
-                  src="#"
+                  src="https://sliding-puzzle-aae71.web.app/#/"
                   title="Video"
                   allowFullScreen
                 ></iframe> 
               </div>
-            </Modal> */}
+            </Modal> 
           </div>
         </div>
       </div>

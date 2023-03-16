@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Modal from '../utils/Modal';
+import React, { useState } from "react";
+import Modal from "../utils/Modal";
 
-import HeroImage from '../images/hero-image-01.jpg';
+import HeroImage from "../images/hero-image-01.jpg";
 
 function HeroHome() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -16,9 +16,23 @@ function HeroHome() {
           data-aos="fade-up"
           data-aos-delay="400"
         >
-          <svg className="max-w-full" width="564" height="552" viewBox="0 0 564 552" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            className="max-w-full"
+            width="564"
+            height="552"
+            viewBox="0 0 564 552"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <defs>
-              <linearGradient id="illustration-02" x1="-3.766" y1="300.204" x2="284.352" y2="577.921" gradientUnits="userSpaceOnUse">
+              <linearGradient
+                id="illustration-02"
+                x1="-3.766"
+                y1="300.204"
+                x2="284.352"
+                y2="577.921"
+                gradientUnits="userSpaceOnUse"
+              >
                 <stop stopColor="#5D5DFF" stopOpacity=".01" />
                 <stop offset="1" stopColor="#5D5DFF" stopOpacity=".32" />
               </linearGradient>
@@ -39,8 +53,13 @@ function HeroHome() {
             <h1 className="h1 mb-4" data-aos="fade-up">
               Coding Club, RVCE
             </h1>
-            <p className="text-xl text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">
-            Join the Coding Club and discover the power to turn your ideas into reality, one line of code at a time!
+            <p
+              className="text-xl text-gray-400 mb-8"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              Join the Coding Club and discover the power to turn your ideas
+              into reality, one line of code at a time!
             </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
@@ -58,8 +77,18 @@ function HeroHome() {
 
           {/* Hero image */}
           <div>
-            <div className="relative flex justify-center items-center" data-aos="fade-up" data-aos-delay="200">
-              <img className="mx-auto" src={HeroImage} width="1024" height="504" alt="Hero" />
+            <div
+              className="relative flex justify-center items-center"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <img
+                className="mx-auto"
+                src={HeroImage}
+                width="1024"
+                height="504"
+                alt="Hero"
+              />
               <a
                 className="absolute group"
                 href="#0"
@@ -76,7 +105,13 @@ function HeroHome() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <defs>
-                    <linearGradient x1="78.169%" y1="9.507%" x2="24.434%" y2="90.469%" id="a">
+                    <linearGradient
+                      x1="78.169%"
+                      y1="9.507%"
+                      x2="24.434%"
+                      y2="90.469%"
+                      id="a"
+                    >
                       <stop stopColor="#EBF1F5" stopOpacity=".8" offset="0%" />
                       <stop stopColor="#EBF1F5" offset="100%" />
                     </linearGradient>
@@ -89,13 +124,23 @@ function HeroHome() {
                 </svg>
               </a>
             </div>
-
             {/* Modal */}
-            <Modal id="modal" ariaLabel="modal-headline" show={videoModalOpen} handleClose={() => setVideoModalOpen(false)}>
+
+            {/* <Modal
+              id="modal"
+              ariaLabel="modal-headline"
+              show={videoModalOpen}
+              handleClose={() => setVideoModalOpen(false)}
+            >
               <div className="relative pb-9/16">
-                <iframe className="absolute w-full h-full" src="https://player.vimeo.com/video/174002812" title="Video" allowFullScreen></iframe>
+                 <iframe
+                  className="absolute w-full h-full"
+                  src="#"
+                  title="Video"
+                  allowFullScreen
+                ></iframe> 
               </div>
-            </Modal>
+            </Modal> */}
           </div>
         </div>
       </div>

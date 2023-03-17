@@ -130,6 +130,22 @@ function Header() {
               <ul className="bg-gray-800 px-4 py-2">
                 <li>
                   <Link
+                    to="/hackathon"
+                    className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center"
+                  >
+                    Hackathon
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/project"
+                    className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center"
+                  >
+                    Project
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     to="/signin"
                     className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center"
                   >

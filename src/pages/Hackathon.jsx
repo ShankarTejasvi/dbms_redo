@@ -272,6 +272,8 @@ const Hackathon = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            {" "}
+            {/*"max-w-6xl mx-auto px-4 sm:px-6">*/}
             <div className="pt-32 pb-8">
               <div className="lg:w-3/4 xl:w-2/3">
                 <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">

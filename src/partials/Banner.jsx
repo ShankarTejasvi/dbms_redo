@@ -11,20 +11,23 @@ function Banner() {
             <div className="text-slate-500 inline-flex">
               <a
                 className="font-medium hover:underline text-slate-50"
-                href="https://github.com/cruip/open-react-template"
+                href=""
                 target="_blank"
                 rel="noreferrer"
               >
-                Download<span className="hidden sm:inline"> on GitHub</span>
+                💖Love our work?
+                <span className="hidden sm:inline"> </span>
               </a>{" "}
-              <span className="italic px-1.5">or</span>{" "}
+              <span className="italic px-1.5">
+                Give us a ✨ or Contribute on{" "}
+              </span>
               <a
                 className="font-medium hover:underline text-emerald-400"
-                href="https://cruip.com/open-pro/"
+                href="https://github.com/ShankarTejasvi/dbms_redo"
                 target="_blank"
                 rel="noreferrer"
               >
-                Check Premium Version
+                Github!
               </a>
             </div>
             <button

@@ -63,7 +63,7 @@ function Testimonials() {
                     </div>
                     <blockquote className="text-lg text-gray-400 grow">— I've been a member of this coding club for several years now and I can confidently say that it has helped me develop my skills and advance my career. The networking opportunities have been instrumental in landing new job opportunities, and the community has been an endless source of support and inspiration. I would highly recommend this club to anyone looking to advance their coding skills and expand their professional network</blockquote>
                     <div className="text-gray-700 font-medium mt-6 pt-5 border-t border-gray-700">
-                      <cite className="text-gray-200 not-italic">Nishanth s</cite> - <a className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out" href="#0">Student, Dept of ISE</a>
+                      <cite className="text-gray-200 not-italic">Nishanth S</cite> - <a className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out" href="#0">Student, Dept of ISE</a>
                     </div>
                   </div>
 

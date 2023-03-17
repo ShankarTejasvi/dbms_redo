@@ -48,7 +48,7 @@ function FeaturesBlocks() {
                 </g>
               </svg>
               <h4 className="h4 mb-2">Prof Priya D</h4>
-              <p className="text-lg text-gray-400 text-center">Student Coordinator and Event Host. Assistant Professor at Dept of Information Science and Engineering</p>
+              <p className="text-lg text-gray-400 text-center">Student Coordinator and Event Host. Assistant Professor, Dept of Information Science and Engineering</p>
             </div>
 
             {/* 4th item */}
@@ -60,8 +60,8 @@ function FeaturesBlocks() {
                   <circle className="stroke-current text-purple-300" cx="13" cy="9" r="3" />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Vidam Trivedi</h4>
-              <p className="text-lg text-gray-400 text-center">President, Coding Club RVCE. Student in Dept of idk</p>
+              <h4 className="h4 mb-2">Divam Trivedi</h4>
+              <p className="text-lg text-gray-400 text-center">President, Coding Club RVCE. Student of Dept of Electronics and Communication</p>
             </div>
 
             {/* 5th item */}
@@ -74,7 +74,7 @@ function FeaturesBlocks() {
                 </g>
               </svg>
               <h4 className="h4 mb-2">Shreenidhi T L</h4>
-              <p className="text-lg text-gray-400 text-center">Vice-President, Coding Club RVCE. Student in Dept of Information Science and Engineering</p>
+              <p className="text-lg text-gray-400 text-center">Vice-President, Coding Club RVCE. Student of Dept of Information Science and Engineering</p>
             </div>
 
             {/* 6th item */}

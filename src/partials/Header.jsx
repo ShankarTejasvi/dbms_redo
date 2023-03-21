@@ -1,12 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "../utils/Dropdown";
+import { useDispatch } from "react-redux";
+import { signOut } from "firebase/auth";
+import { auth } from "./../app/config";
+import { useSelector } from "react-redux";
+import { logout } from "../slices/userSlice";
 
 function Header() {
+  const user = useSelector((state) => state.session.Login);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const trigger = useRef(null);
   const mobileNav = useRef(null);
+  
 
   // close the mobile menu on click outside
   useEffect(() => {
@@ -33,7 +40,24 @@ function Header() {
     document.addEventListener("keydown", keyHandler);
     return () => document.removeEventListener("keydown", keyHandler);
   });
+  const handleLogout = () => {
+    console.log(user);
+    if (user) {
+      signOut(auth)
+        .then(() => {
+          dispatch(logout());
 
+          alert("Logged out successfully!");
+        })
+        .catch((error) => {
+          // An error happened.
+          console.log(error);
+          alert("Log out error");
+        });
+    }
+  };
+  
+  
   return (
     <header className="absolute w-full z-30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -58,6 +82,14 @@ function Header() {
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link
+                  to="/view"
+                  className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                >
+                  Curious Corner
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/hackathon"
                   className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
                 >
@@ -75,22 +107,38 @@ function Header() {
                   Projects
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/signin"
-                  className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
-                >
-                  Sign in
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/signup"
-                  className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3"
-                >
-                  Sign up
-                </Link>
-              </li>
+              {user == null ? (
+                <li>
+                  <Link
+                    to="/signin"
+                    className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                  >
+                    Sign in
+                  </Link>
+                </li>
+              ) : null}
+              {user == null ? (
+                <li>
+                  <Link
+                    to="/signup"
+                    className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3"
+                  >
+                    Sign up
+                  </Link>
+                </li>
+              ) : null}
+
+              {user ? (
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3"
+                  >
+                    Logout
+                  </button>
+                </li>
+              ) : null}
+              
             </ul>
           </nav>
 

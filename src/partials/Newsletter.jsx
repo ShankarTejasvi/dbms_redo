@@ -1,38 +1,39 @@
 import React from "react";
 import sgMail from "@sendgrid/mail";
+import axios from "axios"
 
+function Parsedate(date)
+{
+  let day = date.getDate();
+  let month = date.getMonth();
+  let year = date.getFullYear();
+  let hours= date.getHours()
+  let minutes = date.getMinutes();
+  var ans =  hours + ":" +minutes + ";" +day + "-" + month + "-" + year;
+  console.log(ans.toString())
+  return ans.toString();
+}
 function Newsletter() {
-  {
-    /*
-echo "export SENDGRID_API_KEY='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'" > sendgrid.env
-echo "sendgrid.env" >> .gitignore
-source ./sendgrid.env
-*/
-  }
-  const SENDGRID_API_KEY =
-    "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";
-  //sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  sgMail.setApiKey(SENDGRID_API_KEY);
+  
 
   const [email, setEmail] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const msg = {
-      to: { email },
-      from: "codingclub@rvce.edu.in",
-      subject: "Thanks for subscribing!",
-      text: "Thanks for subscribing to our newsletter!",
-      html: "<p>Thanks for subscribing to our newsletter!</p>",
-    };
-    try {
-      await sgMail.send(msg);
-      setEmail("");
-      alert("Thanks for subscribing!");
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while subscribing. Please try again later.");
-    }
+    var data = {}
+    data["title"] = document.getElementById("title").value;
+    data["description"] = document.getElementById("description").value;
+    data["Date"] = Parsedate(new Date());
+    console.log(data)
+    await axios
+      .post("http://127.0.0.1:4000/announcement", JSON.stringify(data))
+      .then((response) => { 
+        console.log(response.data)
+        if(response.data.response=="success!")
+        alert("Announcement successfull!");
+        else
+          alert("Failed!")
+      });
   };
 
   return (
@@ -79,51 +80,45 @@ source ./sendgrid.env
           <div className="relative flex flex-col lg:flex-row justify-between items-center">
             {/* CTA content */}
             <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left lg:w-1/2">
-              <h3 className="h3 text-white mb-2">Stay in the loop</h3>
+              <h3 className="h3 text-white mb-2">Make an announcement</h3>
               <p className="text-purple-200 text-lg">
-                Join our newsletter to get top news before anyone else.
+                The announcement will be visible to anyone who visits the webiste
               </p>
             </div>
 
-            {/* CTA form 
-             <form className="w-full lg:w-1/2">
-              <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:max-w-none">
-                <input
-                  type="email"
-                  className="w-full appearance-none bg-purple-700 border border-purple-500 focus:border-purple-300 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-purple-400"
-                  placeholder="Your best email…"
-                  aria-label="Your best email…"
-                />
-                <a
-                  className="btn text-purple-600 bg-purple-100 hover:bg-white shadow"
-                  href="#0"
-                >
-                  Subscribe
-                </a>
-              </div>
-              {/* Success message 
-               <p className="text-center lg:text-left lg:absolute mt-2 opacity-75 text-sm">Thanks for subscribing!</p> 
-            </form>  */}
+            
             <form className="w-full lg:w-1/2" onSubmit={handleSubmit}>
               <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:max-w-none">
-                <input
-                  type="email"
+              <input
+                  id="title"
+                  type="text"
                   className="w-full appearance-none bg-purple-700 border border-purple-500 focus:border-purple-300 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-purple-400"
-                  placeholder="Your best email…"
+                  placeholder="Title"
                   aria-label="Your best email…"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <input
+                  type="text"
+                  id="description"
+                  className="w-full appearance-none bg-purple-700 border border-purple-500 focus:border-purple-300 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-purple-400"
+                  placeholder="Description"
+                  aria-label="Your best email…"
                   required
                 />
                 <button
                   type="submit"
                   className="btn text-purple-600 bg-purple-100 hover:bg-white shadow"
                 >
-                  Subscribe
+                  Go
                 </button>
               </div>
             </form>
+            <div>
+            
+            </div>
+            
           </div>
+          
         </div>
       </div>
     </section>

@@ -15,17 +15,25 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.Login = null;
+      state.isAdmin=false;
     },
     isAdmin: (state, action) => {
       console.log(action.payload)
       if(action.payload.Login.email=="shreenidhitl.is20@rvce.edu.in")
         state.isAdmin=true;
+      else  
+        state.isAdmin=false;
     },
   },
 });
 
 export const { login, logout, isAdmin } = userSlice.actions;
 
-export const selectUser = (state) => state.session.Login;
+export const selectUser = (state) => 
+{
+  console.log(state)
+  return "ab";
+  
+};
 
 export default userSlice.reducer;

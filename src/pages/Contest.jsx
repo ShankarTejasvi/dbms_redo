@@ -1,103 +1,298 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-
-import Header from '../partials/Header';
-import PageIllustration from '../partials/PageIllustration';
-import Banner from '../partials/Banner';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Header from "../partials/Header";
+import PageIllustration from "../partials/PageIllustration";
+import Banner from "../partials/Banner";
 const Contest = () => {
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    var data = {};
+    data["type"] = "search";
+    data["searchkey"] = document.getElementById("search").value;
+    console.log(data)
+    await axios
+      .post("http://127.0.0.1:4000/projects", JSON.stringify(data))
+      .then((response) => {
+        var resp = response.data["server"];
+        console.log(resp);
+        setProjects(resp);
+      });
+  };
+  const [Projects, setProjects] = useState([[{ Title: "No searches yet" }]]);
+  const [Hackathons,setHackathons] = useState([])
+  const [Announcements,setAnnouncements] = useState([])
+  const handleHackathons = async (event)=>
+  {
+    event.preventDefault();
+    var data={}
+    data["type"]="Hackathon_details"
+    await axios
+      .post("http://127.0.0.1:4000/hackathon", JSON.stringify(data))
+      .then((response) => { 
+        console.log(response.data);
+        setHackathons(response.data.res)
+      });
+  }
+  const handleAnnouncements = async(event)=>
+  {
+    event.preventDefault();
+    var data={}
+    data["type"]="Announcement_details"
+    await axios
+      .post("http://127.0.0.1:4000/announcement", JSON.stringify(data))
+      .then((response) => { 
+        console.log(response.data);
+        setAnnouncements(response.data.res)
+      });
+  }
   return (
-    
     <div className="flex flex-col min-h-screen overflow-hidden">
+      {/*  Site header */}
+      <Header />
 
-    {/*  Site header */}
-    <Header />
+      {/*  Page content */}
+      <main className="grow">
+        {/*  Page illustration */}
+        <div
+          className="relative max-w-6xl mx-auto h-0 pointer-events-none"
+          aria-hidden="true"
+        >
+          <PageIllustration />
+        </div>
 
-    {/*  Page content */}
-    <main className="grow">
+        <section className="relative">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+              {/* Page header */}
+              <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+                <h1 className="h1">Explore the community!</h1>
+              </div>
+              <div className="relative flex flex-col lg:flex-row justify-between items-center">
+                {/* CTA content */}
+                <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left lg:w-1/2">
+                  <h3 className="h3 text-white mb-2">Project surf🌊</h3>
+                  <p className="text-purple-200 text-lg">
+                    Find your member project details to network with and blend
+                    with the community
+                  </p>
+                </div>
 
-      {/*  Page illustration */}
-      <div className="relative max-w-6xl mx-auto h-0 pointer-events-none" aria-hidden="true">
-        <PageIllustration />
-      </div>
-
-      <section className="relative">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-
-            {/* Page header */}
-            <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-              <h1 className="h1">Welcome. We exist to make entrepreneurship easier.</h1>
-            </div>
-
-            {/* Form */}
-            <div className="max-w-sm mx-auto">
-              <form>
-                <div className="flex flex-wrap -mx-3">
-                  <div className="w-full px-3">
-                    <button className="btn px-0 text-white bg-red-600 hover:bg-red-700 w-full relative flex items-center">
-                      <svg className="w-4 h-4 fill-current text-white opacity-75 shrink-0 mx-4" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.9 7v2.4H12c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C11.5 1.7 9.9 1 8 1 4.1 1 1 4.1 1 8s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H7.9z" />
-                      </svg>
-                      <span className="h-6 flex items-center border-r border-white border-opacity-25 mr-4" aria-hidden="true"></span>
-                      <span className="flex-auto pl-16 pr-8 -ml-16">Sign up with Google</span>
+                <form className="w-full lg:w-1/2">
+                  <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:max-w-none">
+                    <input
+                      type="text"
+                      id="search"
+                      className="w-full appearance-none bg-purple-700 border border-purple-500 focus:border-purple-300 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-purple-400"
+                      placeholder="Enter project title or tech stack"
+                      aria-label="Your best email…"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="btn text-purple-600 bg-purple-100 hover:bg-white shadow"
+                      onClick={handleSearch}
+                    >
+                      Go
                     </button>
                   </div>
-                </div>
-              </form>
-              <div className="flex items-center my-6">
-                <div className="border-t border-gray-700 border-dotted grow mr-3" aria-hidden="true"></div>
-                <div className="text-gray-400">Or, register with your email</div>
-                <div className="border-t border-gray-700 border-dotted grow ml-3" aria-hidden="true"></div>
+                </form>
               </div>
-              <form>
-                <div className="flex flex-wrap -mx-3 mb-4">
-                  <div className="w-full px-3">
-                    <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="full-name">Full Name <span className="text-red-600">*</span></label>
-                    <input id="full-name" type="text" className="form-input w-full text-gray-300" placeholder="First and last name" required />
-                  </div>
-                </div>
-                <div className="flex flex-wrap -mx-3 mb-4">
-                  <div className="w-full px-3">
-                    <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="company-name">Company Name <span className="text-red-600">*</span></label>
-                    <input id="company-name" type="text" className="form-input w-full text-gray-300" placeholder="Your company or app name" required />
-                  </div>
-                </div>
-                <div className="flex flex-wrap -mx-3 mb-4">
-                  <div className="w-full px-3">
-                    <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="email">Work Email <span className="text-red-600">*</span></label>
-                    <input id="email" type="email" className="form-input w-full text-gray-300" placeholder="you@yourcompany.com" required />
-                  </div>
-                </div>
-                <div className="flex flex-wrap -mx-3 mb-4">
-                  <div className="w-full px-3">
-                    <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
-                    <input id="password" type="password" className="form-input w-full text-gray-300" placeholder="Password (at least 10 characters)" required />
-                  </div>
-                </div>
-                <div className="text-sm text-gray-500 text-center">
-                  I agree to be contacted by Open PRO about this offer as per the Open PRO <Link to="#" className="underline text-gray-400 hover:text-gray-200 hover:no-underline transition duration-150 ease-in-out">Privacy Policy</Link>.
-                              </div>
-                <div className="flex flex-wrap -mx-3 mt-6">
-                  <div className="w-full px-3">
-                    <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Sign up</button>
-                  </div>
-                </div>
-              </form>
-              <div className="text-gray-400 text-center mt-6">
-                Already using Open PRO? <Link to="signin" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Sign in</Link>
+
+              <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+                <h3 className="h3 text-white mb-2">Results💡</h3>
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" class="px-6 py-3">
+                        Project title
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        URL
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Tech stack
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Creator email
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Description
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Projects != [[{ Title: "No searches yet" }]]
+                      ? Projects[0].map((data) => (
+                          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th
+                              scope="row"
+                              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >
+                              {data.Title}
+                            </th>
+                            <td class="px-6 py-4">{data.URL}</td>
+                            <td class="px-6 py-4">{data.Tech_Stack}</td>
+                            <td class="px-6 py-4">{data.Email}</td>
+                            <td class="px-6 py-4">{data.Description}</td>
+                          </tr>
+                        ))
+                      : null}
+                  </tbody>
+                </table>
               </div>
+
+              {/* Form */}
             </div>
-
           </div>
-        </div>
-      </section>
+        </section>
 
-    </main>
+        <section className="relative">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="pt-8 pb-12 md:pt-40 md:pb-20">
+              <div className="relative flex flex-col lg:flex-row justify-between items-center">
+                {/* CTA content */}
+                <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left lg:w-1/2">
+                  <h3 className="h3 text-white mb-2">Hackathon Hunt</h3>
+                  <p className="text-purple-200 text-lg">
+                    Team up with your fellow members and participate in inter/intra college hackathons and reign glory🥇
+                  </p>
+                </div>
+                
+                <form className="w-full lg:w-1/2">
+                  <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:max-w-none">
+                   
+                    <button
+                      type="submit"
+                      className="btn text-purple-600 bg-purple-100 hover:bg-white shadow"
+                      onClick={handleHackathons}
+                    >
+                      Search!
+                    </button>
+                  </div>
+                </form>
+              </div>
 
-    <Banner />
+              <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+                
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" class="px-6 py-3">
+                      Team ID
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                      Current Size
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Max size
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Registration Link
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Skill set reqs
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Hackathons != []
+                      ? Hackathons.map((data) => (
+                          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th
+                              scope="row"
+                              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >
+                              {data.Team_id}
+                            </th>
+                            <td class="px-6 py-4">{data.Curr_size}</td>
+                            <td class="px-6 py-4">{data.Max_size}</td>
+                            <td class="px-6 py-4">{data.Reg_link}</td>
+                            <td class="px-6 py-4">{data.Skills_req}</td>
+                          </tr>
+                        ))
+                      : null}
+                  </tbody>
+                </table>
+              </div>
 
-  </div>
-  )
-}
+              {/* Form */}
+            </div>
+          </div>
+        </section>
+        <section className="relative">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="pt-8 pb-12 md:pt-40 md:pb-20">
+              <div className="relative flex flex-col lg:flex-row justify-between items-center">
+                {/* CTA content */}
+                <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left lg:w-1/2">
+                  <h3 className="h3 text-white mb-2">Announcements</h3>
+                  <p className="text-purple-200 text-lg">
+                    Find the announcements made by the admins
+                  </p>
+                </div>
+                
+                <form className="w-full lg:w-1/2">
+                  <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:max-w-none">
+                   
+                    <button
+                      type="submit"
+                      className="btn text-purple-600 bg-purple-100 hover:bg-white shadow"
+                      onClick={handleAnnouncements}
+                    >
+                      Search!
+                    </button>
+                  </div>
+                </form>
+              </div>
 
-export default Contest
+              <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+                
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" class="px-6 py-3">
+                      Title
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                      Date
+                      </th>
+                      <th scope="col" class="px-6 py-3">
+                        Description
+                      </th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Announcements != []
+                      ? Announcements.map((data) => (
+                          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th
+                              scope="row"
+                              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >
+                              {data.Subject}
+                            </th>
+                            <td class="px-6 py-4">{data.Date}</td>
+                            <td class="px-6 py-4">{data.Content}</td>
+                            
+                            
+                          </tr>
+                        ))
+                      : null}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Form */}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Banner />
+    </div>
+  );
+};
+
+export default Contest;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../partials/Header";
 import PageIllustration from "../partials/PageIllustration";
 import Banner from "../partials/Banner";
@@ -7,8 +7,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import axios from "axios";
+
 const Hackathon = () => {
   // const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   const [teamName, setTeamName] = useState("");
   const [maxTeamSize, setMaxTeamSize] = useState("");
   const [currentTeamSize, setCurrentTeamSize] = useState("");
@@ -112,7 +114,9 @@ const Hackathon = () => {
       .then((response) => { 
         console.log(response.data);
       });
-    alert("Form submitted successfully!");
+      
+      alert("Hackathon details uploaded!");
+      navigate("/")
   };
   function Parsedate(date)
   {

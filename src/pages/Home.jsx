@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Header from "../partials/Header";
 import PageIllustration from "../partials/PageIllustration";
@@ -9,8 +9,10 @@ import Testimonials from "../partials/Testimonials";
 import Newsletter from "../partials/Newsletter";
 import Banner from "../partials/Banner";
 import Footer from "../partials/Footer";
-
+import { useSelector } from 'react-redux'
 function Home() {
+  const isAdmin= useSelector( state => state.session.isAdmin)
+  
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       {/*  Site header */}
@@ -27,11 +29,13 @@ function Home() {
         </div>
 
         {/*  Page sections */}
+        
         <HeroHome />
+        {isAdmin?<Newsletter/>:null}
         <FeaturesBlocks />
         <FeaturesZigZag />
         <Testimonials />
-        <Newsletter />
+        
       </main>
 
       <Banner />

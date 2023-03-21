@@ -1,34 +1,23 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux'
 
 function Banner() {
   const [bannerOpen, setBannerOpen] = useState(true);
-
+  const user = useSelector( state => state.session.Login)
   return (
     <>
       {bannerOpen && (
         <div className="fixed bottom-0 right-0 w-full md:bottom-8 md:right-12 md:w-auto z-60">
           <div className="bg-slate-800 text-slate-50 text-sm p-3 md:rounded shadow-lg flex justify-between">
             <div className="text-slate-500 inline-flex">
-              <a
-                className="font-medium hover:underline text-slate-50"
-                href=""
-                target="_blank"
-                rel="noreferrer"
-              >
-                💖Love our work?
-                <span className="hidden sm:inline"> </span>
-              </a>{" "}
+              
+                {user==null?<span className="font-medium hover:underline text-slate-50">Login to access more features!</span>:<span className="font-medium hover:underline text-slate-50">Hello {user.Name}</span>}
+                
+              
               <span className="italic px-1.5">
-                Give us a ✨ or Contribute on{" "}
+                Coding Club RVCE
               </span>
-              <a
-                className="font-medium hover:underline text-emerald-400"
-                href="https://github.com/ShankarTejasvi/dbms_redo"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Github!
-              </a>
+              
             </div>
             <button
               className="text-slate-500 hover:text-slate-400 pl-2 ml-3 border-l border-gray-700"

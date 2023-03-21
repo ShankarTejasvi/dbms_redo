@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../partials/Header";
 import PageIllustration from "../partials/PageIllustration";
 import Select from "react-select";
 import Banner from "../partials/Banner";
 import axios from "axios";
+
 const Project = () => {
   const [email, setEmail] = useState("");
   const [projectName, setProjectName] = useState("");
@@ -13,7 +14,7 @@ const Project = () => {
   const [skillsRequired, setSkillsRequired] = useState([]);
   const [projectDescription, setProjectDescription] = useState("");
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
   const skillOptions = [
     { value: "react", label: "React" },
     { value: "vue", label: "Vue" },
@@ -78,7 +79,9 @@ const Project = () => {
       .then((response) => {
         console.log(response.data);
       });
-    alert("Form submitted successfully!");
+
+    alert("Project added successfully!");
+    navigate("/");
   };
 
   return (
